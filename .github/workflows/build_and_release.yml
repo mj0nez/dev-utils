@@ -23,7 +23,7 @@ jobs:
             ${{ secrets.DOCKERHUB_USERNAME }}/python-dev
           flavor: |
             latest=auto
-            suffix=alpine
+            suffix=-alpine
           tags: |
             type=schedule,pattern={{date 'YYYY-MM-DD'}}
             type=semver,pattern={{version}}
