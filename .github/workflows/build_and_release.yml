@@ -12,7 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python: ["3.11","3.12"]
+        python: ["3.11", "3.12"]
+        version: ["alpine3.18", "bookworm", "slim-bookworm"]
         include:
           - version: "alpine3.18"
             file: "alpine"
@@ -28,7 +29,6 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-
           images: |
             ${{ secrets.DOCKERHUB_USERNAME }}/python-dev
           flavor: |
