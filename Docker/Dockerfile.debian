@@ -1,0 +1,11 @@
+FROM python:3.12-bookworm
+
+RUN apt update && apt upgrade -y
+
+# those packages come with the non-slim image, but we make sure
+RUN apt install --no-install-recommends -y \
+    bash \
+    ca-certificates \
+    curl \
+    git \
+    openssl
