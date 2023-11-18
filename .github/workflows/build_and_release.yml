@@ -25,7 +25,7 @@ jobs:
             latest=auto
             suffix=alpine
           tags: |
-            type=semver,{{date 'YYYY-MM-DD'}}
+            type=schedule,pattern={{date 'YYYY-MM-DD'}}
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
             type=semver,pattern={{major}}
