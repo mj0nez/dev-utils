@@ -1,8 +1,11 @@
-FROM python:3.12-bookworm
+ARG PYTHON_VERSION
+ARG BASE_IMAGE_VERSION
+
+FROM python:${PYTHON_VERSION}-${BASE_IMAGE_VERSION}
 
 RUN apt update && apt upgrade -y
 
-# those packages come with the non-slim image, but we make sure
+# those packages come with the non-slim image
 RUN apt install --no-install-recommends -y \
     bash \
     ca-certificates \
