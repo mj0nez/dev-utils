@@ -14,12 +14,12 @@ jobs:
       matrix:
         python: ["3.11","3.12"]
         include:
-          - file: "alpine"
-            version: "alpine3.18"
-          - file: "debian"
-            version: "bookworm"
-          - file: "debian-slim"
-            version: "slim-bookworm"
+          - version: "alpine3.18"
+            file: "alpine"
+          - version: "bookworm"
+            file: "debian"
+          - version: "slim-bookworm"
+            file: "debian"
     steps:
       - name: Checkout
         uses: actions/checkout@v4
