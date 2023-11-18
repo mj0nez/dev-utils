@@ -8,17 +8,18 @@ on:
     tags: ["v*.*.*"]
 
 jobs:
-  docker:
+  build-and-publish:
     runs-on: ubuntu-latest
     strategy:
       matrix:
+        python: ["3.11","3.12"]
         include:
           - file: "alpine"
-            suffix: "alpine"
+            version: "alpine3.18"
           - file: "debian"
-            suffix: "bookworm"
+            version: "bookworm"
           - file: "debian-slim"
-            suffix: "slim-bookworm"
+            version: "slim-bookworm"
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -27,12 +28,12 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          # list of Docker images to use as base name for tags
+
           images: |
             ${{ secrets.DOCKERHUB_USERNAME }}/python-dev
           flavor: |
             latest=auto
-            suffix=-${{ matrix.suffix }}
+            prefix=${{ matrix.python }}-${{ matrix.version }}-,onlatest=true
           tags: |
             type=schedule,pattern={{date 'YYYYMMDD'}}
             type=semver,pattern={{version}}
@@ -57,6 +58,9 @@ jobs:
         with:
           context: .
           file: ./Docker/Dockerfile.${{ matrix.file }}
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
+          build-args: |
+            PYTHON_VERSION=${{ matrix.python }}
+            BASE_IMAGE_VERSION=${{ matrix.version }}
           labels: ${{ steps.meta.outputs.labels }}
+          tags: ${{ steps.meta.outputs.tags }}
+          push: true
