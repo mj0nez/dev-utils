@@ -12,4 +12,5 @@ RUN apk update && \
         git \
         make \
         openssl \
+        openssh \
     ;
