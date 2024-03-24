@@ -17,6 +17,8 @@ jobs:
         include:
           - version: "alpine3.18"
             file: "alpine"
+          - version: "alpine3.19"
+            file: "alpine"
           - version: "bookworm"
             file: "debian"
           - version: "slim-bookworm"
