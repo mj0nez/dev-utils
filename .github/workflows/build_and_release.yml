@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         python: ["3.11", "3.12"]
-        version: ["alpine3.18", "bookworm", "slim-bookworm"]
+        version: ["alpine3.18", "alpine3.19", "bookworm", "slim-bookworm"]
         include:
           - version: "alpine3.18"
             file: "alpine"
